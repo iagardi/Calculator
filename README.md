@@ -9,10 +9,14 @@ A calculator using HTML, SCSS and JS
 - added fonts and color variables
 - added HTML skeleton -> main containers, buttons, initial classes
 
+#2 Commit:
+
+- main container size and layout -> flex column
+
 ## Project plan:
 
 1. Build skeleton using HTML and SASS.
-   - grid base
+   - mixture of flex and grid base
    - fonts and colors in variables
 2. Add initial button functions using JS
    - Buttons value to show on display

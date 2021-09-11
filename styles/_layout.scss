@@ -1,1 +1,14 @@
 @import "./_base.scss";
+
+main {
+  width: 90vw;
+  max-width: 414px;
+  height: 150vw;
+  max-height: 80vh;
+  margin: 10vh auto;
+  background-color: $color-bg-main;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
