@@ -5,6 +5,7 @@ const topDisplay = document.querySelector(".display-top");
 const numbers = document.querySelectorAll(".btn--num");
 const basicOps = document.querySelectorAll(".btn--ops");
 const clear = document.querySelector(".btn--clear");
+const del = document.querySelector(".btn--del");
 
 let operator = "";
 let topNum = 0;
@@ -32,6 +33,18 @@ clear.addEventListener("click", (event) => {
   // Reset global variables
   operator = "";
   topNum = 0;
+});
+
+// Del button - remove last number
+
+del.addEventListener("click", (event) => {
+  if (botDisplay.innerHTML != 0) {
+    let currentNum = botDisplay.innerHTML;
+    botDisplay.innerHTML = currentNum.slice(0, -1);
+  }
+  if (botDisplay.innerHTML == "") {
+    botDisplay.innerHTML = "0";
+  }
 });
 
 // Basic operators -> accept entry and move value + operator to top display

@@ -26,7 +26,7 @@ A calculator using HTML, SCSS and JS
    - mixture of flex and grid base
    - fonts and colors in variables
 2. Add initial button functions using JS
-   - 6 classes for buttons: numbers, operators, float,
+   - 7 classes for buttons: numbers, operators, float, plus-minus, clear, equal, delete
    - Buttons value to show on display
 3. Add functioning operators
    - Need a lot of research by looking for specific functions rather than calculator specific answers
