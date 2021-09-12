@@ -10,6 +10,19 @@ const del = document.querySelector(".btn--del");
 let operator = "";
 let topNum = 0;
 
+const calculate = (firstNum, secondNum = firstNum, operator) => {
+  switch (operator) {
+    case "+":
+      return firstNum + secondNum;
+    case "-":
+      return firstNum - secondNum;
+    case "*":
+      return firstNum * secondNum;
+    case "/":
+      return firstNum / secondNum;
+  }
+};
+
 // Buttons to push numbers to bot display
 numbers.forEach((number) => {
   number.addEventListener("click", (event) => {

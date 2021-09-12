@@ -20,6 +20,14 @@ A calculator using HTML, SCSS and JS
 - some functionality added to basic operators (move number to top display, show operator)
 - Clear button functionality added
 
+#4 Commit:
+
+- Del buttton to remove last number
+
+#5 Commit:
+
+- Calculate function added
+
 ## Project plan:
 
 1. Build skeleton using HTML and SASS.
