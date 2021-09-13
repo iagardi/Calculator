@@ -34,6 +34,10 @@ A calculator using HTML, SCSS and JS
 
 - Equal button to perform basic operator tasks
 
+#7 Commit:
+
+- Plus/minus button to work
+
 ## Project plan:
 
 1. Build skeleton using HTML and SASS.

@@ -8,6 +8,7 @@ const basicOps = document.querySelectorAll(".btn--ops");
 const clear = document.querySelector(".btn--clear");
 const del = document.querySelector(".btn--del");
 const equal = document.querySelector(".btn--equal");
+const plusminus = document.querySelector(".btn--plusminus");
 
 let operator = "";
 let topNum = 0;
@@ -35,7 +36,7 @@ numbers.forEach((number) => {
   number.addEventListener("click", (event) => {
     const value = number.innerHTML;
     const length = botDisplay.innerHTML.length;
-    console.log(value); // testing during progress
+    // console.log(value); // testing during progress
 
     if (botDisplay.innerHTML == 0) {
       botDisplay.innerHTML = value;
@@ -90,4 +91,13 @@ equal.addEventListener("click", () => {
   const outcome = calculate(topNum, operator, botNum);
   botDisplay.innerHTML = outcome;
   topDisplay.innerHTML = topNum + operator + botNum;
+});
+
+// Plus/minus button to work
+
+plusminus.addEventListener("click", (event) => {
+  if (botDisplay.innerHTML != 0) {
+    botNum = parseInt(botDisplay.innerHTML);
+    botDisplay.innerHTML = botNum * -1;
+  }
 });
