@@ -2,6 +2,8 @@
 
 A calculator using HTML, SCSS and JS
 
+--Initial commit--
+
 #1 Commit:
 
 - created file structure
@@ -26,7 +28,11 @@ A calculator using HTML, SCSS and JS
 
 #5 Commit:
 
-- Calculate function added
+- Calculate function added but not used yet
+
+#6 Commit:
+
+- Equal button to perform basic operator tasks
 
 ## Project plan:
 

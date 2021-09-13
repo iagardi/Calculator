@@ -1,29 +1,36 @@
-// Declare variables for buttons and display
-const botDisplay = document.querySelector(".display-bot");
+// Declare variables and calculate function
+
 const topDisplay = document.querySelector(".display-top");
+const botDisplay = document.querySelector(".display-bot");
 
 const numbers = document.querySelectorAll(".btn--num");
 const basicOps = document.querySelectorAll(".btn--ops");
 const clear = document.querySelector(".btn--clear");
 const del = document.querySelector(".btn--del");
+const equal = document.querySelector(".btn--equal");
 
 let operator = "";
 let topNum = 0;
+let botNum = 0;
 
-const calculate = (firstNum, secondNum = firstNum, operator) => {
-  switch (operator) {
+const calculate = (firstNum, operator, secondNum = firstNum) => {
+  switch (operator.toString()) {
     case "+":
-      return firstNum + secondNum;
+      return parseInt(firstNum) + parseInt(secondNum);
     case "-":
-      return firstNum - secondNum;
+      return parseInt(firstNum) - parseInt(secondNum);
     case "*":
-      return firstNum * secondNum;
+      return parseInt(firstNum) * parseInt(secondNum);
     case "/":
-      return firstNum / secondNum;
+      return parseInt(firstNum) / parseInt(secondNum);
   }
+  // if (operator == "+") {
+  //   return parseInt(firstNum) + parseInt(secondNum);
+  // }
 };
 
 // Buttons to push numbers to bot display
+
 numbers.forEach((number) => {
   number.addEventListener("click", (event) => {
     const value = number.innerHTML;
@@ -39,6 +46,7 @@ numbers.forEach((number) => {
 });
 
 // Clear button
+
 clear.addEventListener("click", (event) => {
   // Reset both displays
   topDisplay.innerHTML = "0";
@@ -61,15 +69,25 @@ del.addEventListener("click", (event) => {
 });
 
 // Basic operators -> accept entry and move value + operator to top display
+
 basicOps.forEach((basicop) => {
-  basicop.addEventListener("click", (event) => {
+  basicop.addEventListener("click", () => {
     // Record current operator into global variable
     const currentOp = basicop.innerHTML;
     operator = currentOp;
 
-    const firstNum = botDisplay.innerHTML;
-    console.log(firstNum);
-    topDisplay.innerHTML = firstNum + currentOp;
+    topNum = parseInt(botDisplay.innerHTML);
+    console.log(topNum);
+    topDisplay.innerHTML = topNum + currentOp;
     botDisplay.innerHTML = "0";
   });
+});
+
+// Equal button to operate basic tasks
+
+equal.addEventListener("click", () => {
+  botNum = botDisplay.innerHTML;
+  const outcome = calculate(topNum, operator, botNum);
+  botDisplay.innerHTML = outcome;
+  topDisplay.innerHTML = topNum + operator + botNum;
 });
