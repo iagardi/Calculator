@@ -38,6 +38,17 @@ A calculator using HTML, SCSS and JS
 
 - Plus/minus button to work
 
+#8 Commit:
+
+- Basic operator buttons work
+- Refactored some code
+  -> operators, variables and evaluate function moved into an object
+  -> updated previous
+
+#9 Commit:
+
+- Changed color theme
+
 ## Project plan:
 
 1. Build skeleton using HTML and SASS.

@@ -20,7 +20,7 @@ main {
   height: 150vw;
   max-height: 80vh;
   margin: 10vh auto;
-  background-color: #d4c7b0;
+  background-color: #0c1b36;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,7 +45,7 @@ main {
   height: 150vw;
   max-height: 80vh;
   margin: 10vh auto;
-  background-color: #d4c7b0;
+  background-color: #0c1b36;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -58,7 +58,7 @@ main {
 
 .display {
   width: 100%;
-  background-color: #a5a58d;
+  background-color: #0c1b36;
   height: 25%;
   display: flex;
   flex-direction: column;
@@ -72,11 +72,12 @@ main {
   align-items: center;
   font-size: 2.3rem;
   font-family: "Orbitron", sans-serif;
+  color: #0059ff;
 }
 
 .buttons {
   width: 100%;
-  background-color: #a5a58d;
+  background-color: #0c1b36;
   flex: 1;
   margin-top: 15px;
   padding: 15px;
@@ -90,7 +91,11 @@ main {
   height: 100%;
   font-family: "Roboto", sans-serif;
   font-size: 1.5rem;
-  background-color: #ffe8d6;
-  color: black;
-  border: none;
+  background-color: #0c1b36;
+  color: #0059ff;
+  border: 2px solid #0c1b36;
+}
+
+.btn:hover {
+  border: 2px solid #0059ff;
 }
