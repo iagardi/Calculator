@@ -28,6 +28,18 @@ const basics = {
         return Number(this.topNum) / Number(this.botNum);
     }
   },
+  plusminus() {
+    return this.botNum * -1;
+  },
+  clear() {
+    this.botNum = "0";
+    this.topNum = "";
+    this.operator = "";
+  },
+  display() {
+    topDisplay.innerHTML = this.topNum + " " + this.operator;
+    botDisplay.innerHTML = this.botNum;
+  },
 };
 
 // Buttons to record input
@@ -41,9 +53,7 @@ numbers.forEach((number) => {
     } else if (basics.botNum.length < 8) {
       basics.botNum += value;
     }
-    botDisplay.innerHTML = basics.botNum;
-    console.log(`Top number: ${basics.topNum}`);
-    console.log(`Bot number: ${basics.botNum}`);
+    basics.display();
   });
 });
 
@@ -68,19 +78,7 @@ del.addEventListener("click", (event) => {
   botDisplay.innerHTML = basics.botNum;
 });
 
-// Basic operators -> accept entry and move value + operator to top display
-
-// if (top = "0") {
-//    move bot to top plus operator
-//    reset bot
-// } else if (top && bot != "0") {
-//    calculate
-//    results to go top plus current op
-// } else (
-//    calculate
-//    reset top
-//    display result on bot
-// )
+// Basic operators
 
 basicOps.forEach((basicop) => {
   basicop.addEventListener("click", () => {
@@ -107,7 +105,8 @@ basicOps.forEach((basicop) => {
     }
   });
 });
-// Equal button to operate basic tasks
+
+// Equal button
 
 equal.addEventListener("click", () => {
   const calc = basics.evaluate();
@@ -130,10 +129,13 @@ plusminus.addEventListener("click", (event) => {
 // Percentage button
 
 percent.addEventListener("click", (event) => {
-  if (topNum != 0 && operator) {
-    const percentage = parseInt(botDisplay.innerHTML) * (topNum / 100);
-    const partial = (parseInt(botDisplay.innerHTML) * percentage).toFixed(2);
-    botDisplay.innerHTML = partial;
+  if (basics.topNum && basics.botNum) {
+    let partial = basics.botNum * (basics.topNum / 100);
+    basics.botNum = partial;
+    topDisplay.innerHTML = basics.topNum + " " + basics.operator;
+    botDisplay.innerHTML = basics.botNum;
+  } else {
+    basics.clear();
   }
 });
 

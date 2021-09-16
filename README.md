@@ -49,6 +49,10 @@ A calculator using HTML, SCSS and JS
 
 - Changed color theme
 
+#10 Commit
+
+- Percentage button functionality added
+
 ## Project plan:
 
 1. Build skeleton using HTML and SASS.
