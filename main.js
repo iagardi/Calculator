@@ -9,95 +9,132 @@ const clear = document.querySelector(".btn--clear");
 const del = document.querySelector(".btn--del");
 const equal = document.querySelector(".btn--equal");
 const plusminus = document.querySelector(".btn--plusminus");
+const percent = document.querySelector(".btn--percent");
+const numAndOp = document.querySelectorAll(".btn--num, .btn--ops");
 
-let operator = "";
-let topNum = 0;
-let botNum = 0;
-
-const calculate = (firstNum, operator, secondNum = firstNum) => {
-  switch (operator.toString()) {
-    case "+":
-      return parseInt(firstNum) + parseInt(secondNum);
-    case "-":
-      return parseInt(firstNum) - parseInt(secondNum);
-    case "*":
-      return parseInt(firstNum) * parseInt(secondNum);
-    case "/":
-      return parseInt(firstNum) / parseInt(secondNum);
-  }
-  // if (operator == "+") {
-  //   return parseInt(firstNum) + parseInt(secondNum);
-  // }
+const basics = {
+  botNum: "0",
+  topNum: "",
+  operator: "",
+  evaluate() {
+    switch (this.operator) {
+      case "+":
+        return Number(this.topNum) + Number(this.botNum);
+      case "-":
+        return Number(this.topNum) - Number(this.botNum);
+      case "*":
+        return Number(this.topNum) * Number(this.botNum);
+      case "/":
+        return Number(this.topNum) / Number(this.botNum);
+    }
+  },
 };
 
-// Buttons to push numbers to bot display
+// Buttons to record input
 
 numbers.forEach((number) => {
   number.addEventListener("click", (event) => {
-    const value = number.innerHTML;
-    const length = botDisplay.innerHTML.length;
-    // console.log(value); // testing during progress
+    let value = number.innerHTML;
 
-    if (botDisplay.innerHTML == 0) {
-      botDisplay.innerHTML = value;
-    } else if (length < 8) {
-      botDisplay.innerHTML += value;
+    if (!basics.botNum || basics.botNum == "0") {
+      basics.botNum = value;
+    } else if (basics.botNum.length < 8) {
+      basics.botNum += value;
     }
+    botDisplay.innerHTML = basics.botNum;
+    console.log(`Top number: ${basics.topNum}`);
+    console.log(`Bot number: ${basics.botNum}`);
   });
 });
 
 // Clear button
 
 clear.addEventListener("click", (event) => {
-  // Reset both displays
-  topDisplay.innerHTML = "0";
-  botDisplay.innerHTML = "0";
-  // Reset global variables
-  operator = "";
-  topNum = 0;
+  basics.topNum = "";
+  basics.botNum = "0";
+  basics.operator = "";
+  topDisplay.innerHTML = basics.topNum;
+  botDisplay.innerHTML = basics.botNum;
 });
 
 // Del button - remove last number
 
 del.addEventListener("click", (event) => {
-  if (botDisplay.innerHTML != 0) {
-    let currentNum = botDisplay.innerHTML;
-    botDisplay.innerHTML = currentNum.slice(0, -1);
+  let current = basics.botNum;
+  basics.botNum = current.slice(0, -1);
+  if (!basics.botNum) {
+    basics.botNum = "0";
   }
-  if (botDisplay.innerHTML == "") {
-    botDisplay.innerHTML = "0";
-  }
+  botDisplay.innerHTML = basics.botNum;
 });
 
 // Basic operators -> accept entry and move value + operator to top display
 
+// if (top = "0") {
+//    move bot to top plus operator
+//    reset bot
+// } else if (top && bot != "0") {
+//    calculate
+//    results to go top plus current op
+// } else (
+//    calculate
+//    reset top
+//    display result on bot
+// )
+
 basicOps.forEach((basicop) => {
   basicop.addEventListener("click", () => {
-    // Record current operator into global variable
     const currentOp = basicop.innerHTML;
-    operator = currentOp;
-
-    topNum = parseInt(botDisplay.innerHTML);
-    console.log(topNum);
-    topDisplay.innerHTML = topNum + currentOp;
-    botDisplay.innerHTML = "0";
+    if (!basics.topNum) {
+      basics.topNum = basics.botNum;
+      basics.operator = currentOp;
+      basics.botNum = "0";
+      topDisplay.innerHTML = basics.topNum + " " + basics.operator;
+      botDisplay.innerHTML = basics.botNum;
+    } else if (basics.topNum && basics.botNum != "0") {
+      const calc = basics.evaluate();
+      basics.topNum = calc;
+      basics.botNum = "0";
+      basics.operator = currentOp;
+      topDisplay.innerHTML = basics.topNum + " " + basics.operator;
+      botDisplay.innerHTML = basics.botNum;
+    } else {
+      const calc = basics.evaluate();
+      basics.botNum = calc;
+      basics.topNum = "";
+      topDisplay.innerHTML = basics.topNum + " " + basics.operator;
+      botDisplay.innerHTML = basics.botNum;
+    }
   });
 });
-
 // Equal button to operate basic tasks
 
 equal.addEventListener("click", () => {
-  botNum = botDisplay.innerHTML;
-  const outcome = calculate(topNum, operator, botNum);
-  botDisplay.innerHTML = outcome;
-  topDisplay.innerHTML = topNum + operator + botNum;
+  const calc = basics.evaluate();
+  basics.botNum = calc;
+  botDisplay.innerHTML = basics.botNum;
+  basics.topNum = "";
+  topDisplay.innerHTML = basics.topNum;
 });
 
-// Plus/minus button to work
+// Plus/minus button
 
 plusminus.addEventListener("click", (event) => {
-  if (botDisplay.innerHTML != 0) {
-    botNum = parseInt(botDisplay.innerHTML);
-    botDisplay.innerHTML = botNum * -1;
+  if (basics.botNum != 0) {
+    let plusminus = basics.plusminus();
+    basics.botNum = plusminus;
+    botDisplay.innerHTML = basics.botNum;
   }
 });
+
+// Percentage button
+
+percent.addEventListener("click", (event) => {
+  if (topNum != 0 && operator) {
+    const percentage = parseInt(botDisplay.innerHTML) * (topNum / 100);
+    const partial = (parseInt(botDisplay.innerHTML) * percentage).toFixed(2);
+    botDisplay.innerHTML = partial;
+  }
+});
+
+// Float button
