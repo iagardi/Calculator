@@ -1,0 +1,24 @@
+{
+  "name": "Calculator",
+  "version": "1.0.0",
+  "description": "A calculator using HTML, SCSS and JS",
+  "main": "main.js",
+  "dependencies": {
+    "cypress": "^8.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iagardi/Calculator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iagardi/Calculator/issues"
+  },
+  "homepage": "https://github.com/iagardi/Calculator#readme"
+}

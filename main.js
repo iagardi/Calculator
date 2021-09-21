@@ -38,7 +38,7 @@ const basics = {
   },
   display() {
     topDisplay.innerHTML = this.topNum + " " + this.operator;
-    botDisplay.innerHTML = this.botNum;
+    botDisplay.innerHTML = this.botNum.substr(0, 8);
   },
 };
 
@@ -111,6 +111,7 @@ basicOps.forEach((basicop) => {
 equal.addEventListener("click", () => {
   const calc = basics.evaluate();
   basics.botNum = calc;
+  basics.topNum = "";
   botDisplay.innerHTML = basics.botNum;
   basics.topNum = "";
   topDisplay.innerHTML = basics.topNum;
@@ -136,6 +137,7 @@ percent.addEventListener("click", (event) => {
     botDisplay.innerHTML = basics.botNum;
   } else {
     basics.clear();
+    basics.display();
   }
 });
 
