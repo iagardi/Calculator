@@ -1,8 +1,8 @@
 # Calculator
 
-A calculator using HTML, SCSS and JS
+A calculator using HTML, SCSS and JS. Includes E2E tests using Cypress. 
 
---Initial commit--
+
 
 #1 Commit:
 
