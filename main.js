@@ -12,8 +12,8 @@ const plusminus = document.querySelector(".btn--plusminus");
 const percent = document.querySelector(".btn--percent");
 const numAndOp = document.querySelectorAll(".btn--num, .btn--ops");
 
-const basics = {
-  botNum: "0",
+const calculator = {
+  botNum: "",
   topNum: "",
   operator: "",
   evaluate() {
@@ -32,50 +32,44 @@ const basics = {
     return this.botNum * -1;
   },
   clear() {
-    this.botNum = "0";
+    this.botNum = "";
     this.topNum = "";
     this.operator = "";
   },
   display() {
-    topDisplay.innerHTML = this.topNum + " " + this.operator;
-    botDisplay.innerHTML = this.botNum.substr(0, 8);
+    topDisplay.value = this.topNum + " " + this.operator;
+    botDisplay.value = this.botNum;
   },
 };
 
 // Buttons to record input
 
 numbers.forEach((number) => {
-  number.addEventListener("click", (event) => {
+  number.addEventListener("click", () => {
     let value = number.innerHTML;
-
-    if (!basics.botNum || basics.botNum == "0") {
-      basics.botNum = value;
-    } else if (basics.botNum.length < 8) {
-      basics.botNum += value;
-    }
-    basics.display();
+    calculator.botNum ? calculator.botNum += value : calculator.botNum = value
+    calculator.display();
   });
 });
 
 // Clear button
 
-clear.addEventListener("click", (event) => {
-  basics.topNum = "";
-  basics.botNum = "0";
-  basics.operator = "";
-  topDisplay.innerHTML = basics.topNum;
-  botDisplay.innerHTML = basics.botNum;
+clear.addEventListener("click", () => {
+  calculator.topNum = "";
+  calculator.botNum = "";
+  calculator.operator = "";
+  calculator.display()
 });
 
 // Del button - remove last number
 
 del.addEventListener("click", (event) => {
-  let current = basics.botNum;
-  basics.botNum = current.slice(0, -1);
-  if (!basics.botNum) {
-    basics.botNum = "0";
+  let current = calculator.botNum;
+  calculator.botNum = current.slice(0, -1);
+  if (!calculator.botNum) {
+    calculator.botNum = "";
   }
-  botDisplay.innerHTML = basics.botNum;
+  botDisplay.value = calculator.botNum;
 });
 
 // Basic operators

@@ -4,6 +4,7 @@
 .main__container {
   padding: 15px;
 }
+
 .display {
   width: 100%;
   background-color: $color-bg-main;
@@ -21,6 +22,7 @@
   font-size: 2.3rem;
   font-family: $font--display;
   color: $color-font;
+  text-align: right;
 }
 
 .buttons {
