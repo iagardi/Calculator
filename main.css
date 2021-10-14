@@ -52,8 +52,19 @@ main {
   align-items: center;
 }
 
+body {
+  background-color: grey;
+  background-image: url("../assets/background.jpg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
 .main__container {
   padding: 15px;
+  border-radius: 15px;
+  border: 3px solid #cf004f;
 }
 
 .display {
@@ -72,8 +83,12 @@ main {
   align-items: center;
   font-size: 2.3rem;
   font-family: "Orbitron", sans-serif;
-  color: #0059ff;
+  color: #cf004f;
   text-align: right;
+  cursor: default;
+  pointer-events: none;
+  background-color: #0c1b36;
+  border: 0px none;
 }
 
 .buttons {
@@ -93,11 +108,11 @@ main {
   font-family: "Roboto", sans-serif;
   font-size: 1.5rem;
   background-color: #0c1b36;
-  color: #0059ff;
+  color: #cf004f;
   border: 2px solid #0c1b36;
   border-radius: 5px;
 }
 
 .btn:hover {
-  border: 2px solid #0059ff;
+  border: 2px solid #cf004f;
 }

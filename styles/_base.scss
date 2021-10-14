@@ -10,13 +10,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap");
 
 // Font for display
-$font--display: "Orbitron", sans-serif;
+$font--display: "Orbitron",
+sans-serif;
 
 // Font for buttons
-$font--button: "Roboto", sans-serif;
+$font--button: "Roboto",
+sans-serif;
 
 // Color theme variables
 $color-bg-main: #0c1b36;
 
-$color-font: rgb(0, 89, 255);
+// $color-font: rgb(0, 89, 255);
+$color-font: rgb(207, 0, 79);
 $color-border: rgb(0, 89, 255);

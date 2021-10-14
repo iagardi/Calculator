@@ -1,8 +1,19 @@
 @import "./_base.scss";
 @import "./_layout.scss";
 
+body {
+  background-color: grey;
+  background-image: url('../assets/background.jpg');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
 .main__container {
   padding: 15px;
+  border-radius: 15px;
+  border: 3px solid $color-font;
 }
 
 .display {
@@ -23,6 +34,10 @@
   font-family: $font--display;
   color: $color-font;
   text-align: right;
+  cursor: default;
+  pointer-events: none;
+  background-color: $color-bg-main;
+  border: 0px none;
 }
 
 .buttons {
