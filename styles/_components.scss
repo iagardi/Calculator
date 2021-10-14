@@ -1,9 +1,39 @@
 @import "./_base.scss";
 @import "./_layout.scss";
 
+body {
+  background-color: grey;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  position: relative;
+}
+
+.opacity {
+  z-index: 1;
+  background-image: url('../assets/background.jpg');
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: $color-bg-main;
+  filter: invert(10%) saturate(150%);
+}
+
 .main__container {
   padding: 15px;
+  border-radius: 15px;
+  border: 3px solid $color-font;
+  z-index: 2;
+  transition: 1s ease-in-out all;
 }
+
+.main__container:hover {
+  transform: scale(1.01);
+  box-shadow: 15px 15px 15px black;
+}
+
 .display {
   width: 100%;
   background-color: $color-bg-main;
@@ -21,6 +51,11 @@
   font-size: 2.3rem;
   font-family: $font--display;
   color: $color-font;
+  text-align: right;
+  cursor: default;
+  pointer-events: none;
+  background-color: $color-bg-main;
+  border: 0px none;
 }
 
 .buttons {

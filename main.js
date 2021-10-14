@@ -1,5 +1,9 @@
 // Declare variables and calculate function
 
+// const {
+//   last
+// } = require("cypress/types/lodash");
+
 const topDisplay = document.querySelector(".display-top");
 const botDisplay = document.querySelector(".display-bot");
 
@@ -11,21 +15,22 @@ const equal = document.querySelector(".btn--equal");
 const plusminus = document.querySelector(".btn--plusminus");
 const percent = document.querySelector(".btn--percent");
 const numAndOp = document.querySelectorAll(".btn--num, .btn--ops");
+const float = document.querySelector(".btn--float");
 
-const basics = {
+const calculator = {
   botNum: "0",
   topNum: "",
   operator: "",
   evaluate() {
     switch (this.operator) {
       case "+":
-        return Number(this.topNum) + Number(this.botNum);
+        return String((Number(this.topNum) + Number(this.botNum))).slice(0, 12);
       case "-":
-        return Number(this.topNum) - Number(this.botNum);
+        return String((Number(this.topNum) - Number(this.botNum))).slice(0, 12);
       case "*":
-        return Number(this.topNum) * Number(this.botNum);
+        return String((Number(this.topNum) * Number(this.botNum))).slice(0, 12);
       case "/":
-        return Number(this.topNum) / Number(this.botNum);
+        return String((Number(this.topNum) / Number(this.botNum))).slice(0, 12);
     }
   },
   plusminus() {
@@ -37,45 +42,47 @@ const basics = {
     this.operator = "";
   },
   display() {
-    topDisplay.innerHTML = this.topNum + " " + this.operator;
-    botDisplay.innerHTML = this.botNum.substr(0, 8);
+    topDisplay.value = this.topNum + " " + this.operator;
+    botDisplay.value = this.botNum;
   },
 };
 
 // Buttons to record input
 
 numbers.forEach((number) => {
-  number.addEventListener("click", (event) => {
+  number.addEventListener("click", () => {
     let value = number.innerHTML;
-
-    if (!basics.botNum || basics.botNum == "0") {
-      basics.botNum = value;
-    } else if (basics.botNum.length < 8) {
-      basics.botNum += value;
+    const lastDigit = calculator.botNum.charAt(calculator.botNum.length - 1)
+    if (calculator.botNum.length < 11) {
+      if (lastDigit != 0) {
+        calculator.botNum += value
+      } else {
+        calculator.botNum = value
+      }
     }
-    basics.display();
+    console.log(calculator.botNum)
+    calculator.display();
   });
 });
 
 // Clear button
 
-clear.addEventListener("click", (event) => {
-  basics.topNum = "";
-  basics.botNum = "0";
-  basics.operator = "";
-  topDisplay.innerHTML = basics.topNum;
-  botDisplay.innerHTML = basics.botNum;
+clear.addEventListener("click", () => {
+  calculator.topNum = "";
+  calculator.botNum = "0";
+  calculator.operator = "";
+  calculator.display()
 });
 
 // Del button - remove last number
 
 del.addEventListener("click", (event) => {
-  let current = basics.botNum;
-  basics.botNum = current.slice(0, -1);
-  if (!basics.botNum) {
-    basics.botNum = "0";
+  let current = calculator.botNum;
+  calculator.botNum = current.slice(0, -1);
+  if (!calculator.botNum) {
+    calculator.botNum = "0";
   }
-  botDisplay.innerHTML = basics.botNum;
+  botDisplay.value = calculator.botNum;
 });
 
 // Basic operators
@@ -83,25 +90,25 @@ del.addEventListener("click", (event) => {
 basicOps.forEach((basicop) => {
   basicop.addEventListener("click", () => {
     const currentOp = basicop.innerHTML;
-    if (!basics.topNum) {
-      basics.topNum = basics.botNum;
-      basics.operator = currentOp;
-      basics.botNum = "0";
-      topDisplay.innerHTML = basics.topNum + " " + basics.operator;
-      botDisplay.innerHTML = basics.botNum;
-    } else if (basics.topNum && basics.botNum != "0") {
-      const calc = basics.evaluate();
-      basics.topNum = calc;
-      basics.botNum = "0";
-      basics.operator = currentOp;
-      topDisplay.innerHTML = basics.topNum + " " + basics.operator;
-      botDisplay.innerHTML = basics.botNum;
-    } else {
-      const calc = basics.evaluate();
-      basics.botNum = calc;
-      basics.topNum = "";
-      topDisplay.innerHTML = basics.topNum + " " + basics.operator;
-      botDisplay.innerHTML = basics.botNum;
+    const lastDigit = calculator.botNum.charAt(calculator.botNum.length - 1)
+    if (lastDigit != ".") {
+      if (!calculator.topNum) {
+        calculator.topNum = calculator.botNum;
+        calculator.operator = currentOp;
+        calculator.botNum = "";
+        calculator.display()
+      } else if (calculator.topNum && (calculator.botNum != "0")) {
+        const calc = calculator.evaluate();
+        calculator.topNum = calc;
+        calculator.botNum = "";
+        calculator.operator = currentOp;
+        calculator.display()
+      } else {
+        const calc = calculator.evaluate();
+        calculator.botNum = calc;
+        calculator.topNum = "";
+        calculator.display()
+      }
     }
   });
 });
@@ -109,36 +116,43 @@ basicOps.forEach((basicop) => {
 // Equal button
 
 equal.addEventListener("click", () => {
-  const calc = basics.evaluate();
-  basics.botNum = calc;
-  basics.topNum = "";
-  botDisplay.innerHTML = basics.botNum;
-  basics.topNum = "";
-  topDisplay.innerHTML = basics.topNum;
+  const calc = calculator.evaluate();
+  calculator.botNum = calc;
+  calculator.topNum = "";
+  botDisplay.value = calculator.botNum;
+  calculator.topNum = "";
+  topDisplay.value = calculator.topNum;
 });
 
 // Plus/minus button
 
-plusminus.addEventListener("click", (event) => {
-  if (basics.botNum != 0) {
-    let plusminus = basics.plusminus();
-    basics.botNum = plusminus;
-    botDisplay.innerHTML = basics.botNum;
+plusminus.addEventListener("click", () => {
+  if (calculator.botNum != 0 && calculator.botNum) {
+    let plusminus = calculator.plusminus();
+    calculator.botNum = plusminus;
+    botDisplay.value = calculator.botNum;
   }
 });
 
 // Percentage button
 
-percent.addEventListener("click", (event) => {
-  if (basics.topNum && basics.botNum) {
-    let partial = basics.botNum * (basics.topNum / 100);
-    basics.botNum = partial;
-    topDisplay.innerHTML = basics.topNum + " " + basics.operator;
-    botDisplay.innerHTML = basics.botNum;
+percent.addEventListener("click", () => {
+  if (calculator.topNum && calculator.botNum) {
+    const partial = calculator.botNum * (calculator.topNum / 100);
+    calculator.botNum = partial;
+    topDisplay.value = calculator.topNum + " " + calculator.operator + " " + partial
+    botDisplay.value = ""
   } else {
-    basics.clear();
-    basics.display();
+    calculator.clear();
+    calculator.display();
   }
 });
 
 // Float button
+
+float.addEventListener("click", () => {
+  if (botDisplay.value.indexOf(".") == -1) {
+    calculator.botNum += "."
+    calculator.display()
+  }
+})
