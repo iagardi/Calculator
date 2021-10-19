@@ -54,7 +54,7 @@ numbers.forEach((number) => {
     let value = number.innerHTML;
     const lastDigit = calculator.botNum.charAt(calculator.botNum.length - 1)
     if (calculator.botNum.length < 11) {
-      if (lastDigit != 0) {
+      if (lastDigit != 0 || calculator.botNum.length > 1) {
         calculator.botNum += value
       } else {
         calculator.botNum = value
