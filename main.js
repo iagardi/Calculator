@@ -4,6 +4,10 @@
 //   last
 // } = require("cypress/types/lodash");
 
+// const {
+//   last
+// } = require("cypress/types/lodash");
+
 const topDisplay = document.querySelector(".display-top");
 const botDisplay = document.querySelector(".display-bot");
 
@@ -41,9 +45,13 @@ const calculator = {
     this.topNum = "";
     this.operator = "";
   },
+  trim() {
+
+  },
   display() {
     topDisplay.value = this.topNum + " " + this.operator;
     botDisplay.value = this.botNum;
+    console.log(typeof this.topNum)
   },
 };
 
@@ -116,12 +124,15 @@ basicOps.forEach((basicop) => {
 // Equal button
 
 equal.addEventListener("click", () => {
-  const calc = calculator.evaluate();
-  calculator.botNum = calc;
-  calculator.topNum = "";
-  botDisplay.value = calculator.botNum;
-  calculator.topNum = "";
-  topDisplay.value = calculator.topNum;
+  if (calculator.operator) {
+    calculator.topNum = calculator.botNum;
+    const calc = calculator.evaluate();
+    calculator.botNum = calc;
+    calculator.topNum = "";
+    botDisplay.value = calculator.botNum;
+    calculator.topNum = "";
+    topDisplay.value = calculator.topNum;
+  }
 });
 
 // Plus/minus button
