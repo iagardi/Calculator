@@ -1,13 +1,3 @@
-// Declare variables and calculate function
-
-// const {
-//   last
-// } = require("cypress/types/lodash");
-
-// const {
-//   last
-// } = require("cypress/types/lodash");
-
 const topDisplay = document.querySelector(".display-top");
 const botDisplay = document.querySelector(".display-bot");
 
@@ -103,7 +93,7 @@ basicOps.forEach((basicop) => {
       if (!calculator.topNum) {
         calculator.topNum = calculator.botNum;
         calculator.operator = currentOp;
-        calculator.botNum = "";
+        calculator.botNum = "0";
         calculator.display()
       } else if (calculator.topNum && (calculator.botNum != "0")) {
         const calc = calculator.evaluate();
@@ -125,14 +115,13 @@ basicOps.forEach((basicop) => {
 
 equal.addEventListener("click", () => {
   if (calculator.operator) {
-    calculator.topNum = calculator.botNum;
     const calc = calculator.evaluate();
     calculator.botNum = calc;
     calculator.topNum = "";
     botDisplay.value = calculator.botNum;
-    calculator.topNum = "";
     topDisplay.value = calculator.topNum;
   }
+
 });
 
 // Plus/minus button
@@ -151,8 +140,8 @@ percent.addEventListener("click", () => {
   if (calculator.topNum && calculator.botNum) {
     const partial = calculator.botNum * (calculator.topNum / 100);
     calculator.botNum = partial;
-    topDisplay.value = calculator.topNum + " " + calculator.operator + " " + partial
-    botDisplay.value = ""
+    calculator.evaluate()
+    calculator.display()
   } else {
     calculator.clear();
     calculator.display();
